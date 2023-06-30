@@ -8,125 +8,114 @@
     tools:context=".MainActivity">
 
     <Button
-        android:layout_width="400dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="60dp"
+        android:id="@+id/stage_but"
+        android:layout_width="390dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="100dp"
         android:text="Stage mod"
-        android:textSize="40dp"
+        android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.931"
+        app:layout_constraintHorizontal_bias="0.914"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/play_but"
         android:layout_width="180dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="304dp"
+        android:layout_marginBottom="240dp"
         android:text="PLAY"
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.745"
+        app:layout_constraintHorizontal_bias="0.659"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/stop_but"
         android:layout_width="180dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="304dp"
+        android:layout_marginBottom="240dp"
         android:text="STOP"
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.945"
+        app:layout_constraintHorizontal_bias="0.937"
         app:layout_constraintStart_toStartOf="parent" />
 
     <SeekBar
-        android:id="@+id/seekBar3"
+        android:id="@+id/seekBar"
         style="@android:style/Widget.SeekBar"
         android:layout_width="400dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="472dp"
+        android:layout_marginBottom="376dp"
         android:scrollbarStyle="insideInset"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintHorizontal_bias="0.918"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTextText"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="820dp"
+        android:id="@+id/input_bpm"
+        android:layout_width="420dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="512dp"
         android:ems="10"
         android:inputType="number"
         android:maxLength="3"
         android:text="100"
         android:textAlignment="center"
-        android:textSize="40dp"
+        android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.111" />
+        app:layout_constraintVertical_bias="0.058" />
 
     <GridView
-        android:layout_width="600dp"
-        android:layout_height="500dp"
-        android:layout_marginStart="80dp"
+        android:id="@+id/view_song"
+        android:layout_width="486dp"
+        android:layout_height="496dp"
+        android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.27" />
+        app:layout_constraintVertical_bias="0.035" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/del_but"
         android:layout_width="180dp"
         android:layout_height="60dp"
-        android:layout_marginStart="500dp"
+        android:layout_marginStart="732dp"
         android:text="DELETE"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.917" />
+        app:layout_constraintVertical_bias="0.97" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/add_but"
         android:layout_width="180dp"
         android:layout_height="60dp"
-        android:layout_marginStart="300dp"
+        android:layout_marginStart="524dp"
         android:text="ADD NEW"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.918" />
+        app:layout_constraintVertical_bias="0.97" />
 
     <EditText
-        android:id="@+id/editTextNumber"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="580dp"
-        android:ems="10"
-        android:inputType="number"
-        android:text="Input BPM"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.809" />
-
-    <EditText
-        android:id="@+id/editTextText2"
-        android:layout_width="400dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="80dp"
+        android:id="@+id/input_text"
+        android:layout_width="481dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="text"
         android:text="Input name song"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.81" />
+        app:layout_constraintVertical_bias="0.97" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
