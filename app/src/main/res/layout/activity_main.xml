@@ -50,6 +50,9 @@
         android:layout_height="100dp"
         android:layout_marginBottom="376dp"
         android:scrollbarStyle="insideInset"
+        android:min="1"
+        android:max="255"
+        android:progress="100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.918"
@@ -73,8 +76,8 @@
 
     <GridView
         android:id="@+id/view_song"
-        android:layout_width="486dp"
-        android:layout_height="496dp"
+        android:layout_width="481dp"
+        android:layout_height="442dp"
         android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,11 +109,10 @@
         app:layout_constraintVertical_bias="0.97" />
 
     <EditText
-        android:id="@+id/input_text"
+        android:id="@+id/input_song"
         android:layout_width="481dp"
         android:layout_height="58dp"
         android:layout_marginStart="8dp"
-        android:ems="10"
         android:inputType="text"
         android:text="Input name song"
         app:layout_constraintBottom_toBottomOf="parent"
