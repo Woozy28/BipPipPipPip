@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         val songmap = mutableMapOf<String,Int>("First song" to 120, "Second song" to 140) //список с бипиэмами
         val viewsong = mutableListOf<String>("First song","Second song") //Список песен
+        var now_playing:String = ""
 
         //всё с фронта
         val songview: GridView = findViewById(R.id.view_song)
@@ -24,15 +25,17 @@ class MainActivity : AppCompatActivity() {
         val bpmspin: SeekBar = findViewById(R.id.seekBar)
         val songinput: EditText = findViewById(R.id.input_song)
         val addnew: Button = findViewById(R.id.add_but)
-        //val deletesong: Button = findViewById(R.id.del_but)
+        val deletesong: Button = findViewById(R.id.del_but)
 
 
         //адаптер для списка
         val songlistadapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,viewsong)
         songview.adapter = songlistadapter
 
+        //выбор трека
         songview.setOnItemClickListener { parent, view, position, id ->
             bpminput.setText(songmap.get(songlistadapter.getItem(position).toString()).toString())
+            now_playing = parent.getItemAtPosition(position).toString() //текущее название трека
 
         }
 
@@ -61,6 +64,12 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        //Удаление трека
+        deletesong.setOnClickListener {
+            viewsong.remove(now_playing)
+            songmap.remove(now_playing)
+            songlistadapter.notifyDataSetChanged()
+        }
 
     }
 
