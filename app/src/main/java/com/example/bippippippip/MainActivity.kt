@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.GridView
 import android.widget.SeekBar
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.get
 
 
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         songview.setOnItemClickListener { parent, view, position, id ->
             bpminput.setText(songmap.get(songlistadapter.getItem(position).toString()).toString())
             now_playing = parent.getItemAtPosition(position).toString() //текущее название трека
-
+            bpmspin.setProgress(songmap.get(now_playing)!!)
         }
 
         //листенер сикбара
@@ -66,9 +67,17 @@ class MainActivity : AppCompatActivity() {
 
         //Удаление трека
         deletesong.setOnClickListener {
-            viewsong.remove(now_playing)
-            songmap.remove(now_playing)
-            songlistadapter.notifyDataSetChanged()
+            val deletalert = AlertDialog.Builder(this@MainActivity)
+            deletalert.setTitle("Delete song")
+            deletalert.setMessage("you want to delete ${now_playing}")
+            deletalert.setPositiveButton("Delete"){dialog,which ->
+                viewsong.remove(now_playing)
+                songmap.remove(now_playing)
+                songlistadapter.notifyDataSetChanged()
+            }
+            deletalert.setNeutralButton("Stop it!"){_,_ ->}
+
+            deletalert.show()
         }
 
     }
