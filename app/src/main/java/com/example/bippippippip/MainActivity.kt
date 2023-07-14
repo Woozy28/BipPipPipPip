@@ -102,12 +102,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun playClick() {
         // Создаем MediaPlayer и загружаем звуковой файл из ресурсов
-        mediaPlayer = MediaPlayer.create(this, R.raw.click)
+        mediaPlayer = MediaPlayer.create(this, R.raw.clic)
 
         // Устанавливаем обработчик окончания воспроизведения звука
-        //mediaPlayer?.setOnCompletionListener {
-        //    stopSound()
-        //}
+        mediaPlayer?.setOnCompletionListener {
+            stopSound()
+        }
 
         // Начинаем воспроизведение звука
         mediaPlayer?.start()
@@ -125,6 +125,13 @@ class MainActivity : AppCompatActivity() {
             mediaPlayer = null
         }
     }
+    override fun onStop() {
+        super.onStop()
+
+        // Освобождаем ресурсы MediaPlayer при закрытии активности или фрагмента
+        stopSound()
+    }
+
 }
 
 
