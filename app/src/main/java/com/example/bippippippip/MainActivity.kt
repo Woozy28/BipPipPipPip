@@ -9,10 +9,20 @@ import android.widget.GridView
 import android.widget.SeekBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-
+import android.content.pm.ActivityInfo
+import android.graphics.Color
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity() {
+
 
     private var mediaPlayer: MediaPlayer? = null
 
@@ -20,12 +30,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
 
         val songmap = mutableMapOf<String,Int>("First song" to 120, "Second song" to 140) //список с бипиэмами
         val viewsong = mutableListOf<String>("First song","Second song") //Список песен
         var now_playing:String = ""
-
+        var startstop: Int = 1
 
         //всё с фронта
         val songview: GridView = findViewById(R.id.view_song)
@@ -38,9 +49,11 @@ class MainActivity : AppCompatActivity() {
         val stopclick: Button = findViewById(R.id.stop_but)
 
 
+
         //адаптер для списка
         val songlistadapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,viewsong)
         songview.adapter = songlistadapter
+
 
         //выбор трека
         songview.setOnItemClickListener { parent, view, position, id ->
@@ -89,28 +102,45 @@ class MainActivity : AppCompatActivity() {
             deletalert.show()
         }
 
+         val viewModelJob = Job()
+         val uiScope = CoroutineScope(Main + viewModelJob)
+
         //Запуск клика
         playclick.setOnClickListener {
+            val bpm:Int= 60000/bpminput.text.toString().toInt()
             playClick()
+            startstop =1
+            uiScope.launch {
+                while(startstop == 1) {
+                    mediaPlayer?.start()
+                    delay(bpm.toLong())
+                }
+            }
         }
-
         stopclick.setOnClickListener {
+            startstop = 0
             stopSound()
         }
-
     }
-
+    private suspend fun go_volume(): Unit{
+        do {
+            mediaPlayer?.start()
+            delay(1000)
+        }
+        while(mediaPlayer?.isPlaying == true)
+        //Thread.sleep(bpm.toLong())
+    }
     private fun playClick() {
         // Создаем MediaPlayer и загружаем звуковой файл из ресурсов
         mediaPlayer = MediaPlayer.create(this, R.raw.clic)
 
         // Устанавливаем обработчик окончания воспроизведения звука
-        mediaPlayer?.setOnCompletionListener {
-            stopSound()
-        }
+        //mediaPlayer?.setOnCompletionListener {
+        //    stopSound()
+        //}
 
         // Начинаем воспроизведение звука
-        mediaPlayer?.start()
+        //mediaPlayer?.start()
     }
 
     private fun stopSound() {
@@ -134,23 +164,3 @@ class MainActivity : AppCompatActivity() {
 
 }
 
-
-
-
-
-
-
-//        soundPool =
-//            val audioAttributes = Builder()
-//                .setContentType(CONTENT_TYPE_SONIFICATION)
-//                .setUsage(USAGE_ASSISTANCE_SONIFICATION)
-//                .build();
-//            SoundPool.Builder()
-//                .setMaxStreams(3)
-//                .setAudioAttributes(audioAttributes)
-//                .build()
-
-//        playclick.setOnClickListener {
-//            soundPool!!.play(click,1f,1f,0,0,1f)
-//            soundPool!!.autoPause()
-//        }
