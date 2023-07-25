@@ -48,6 +48,14 @@ class MainActivity : AppCompatActivity() {
         val playclick: Button = findViewById(R.id.play_but)
         val stopclick: Button = findViewById(R.id.stop_but)
 
+        //Алерт при добавлении трека с одинаковым названием трека.
+        val addalert = AlertDialog.Builder(this@MainActivity)
+        addalert.setTitle("Can't do that")
+        addalert.setMessage("Need new name of song")
+        addalert.setPositiveButton("OK"){_,_ ->
+
+        }
+
 
 
         //адаптер для списка
@@ -81,9 +89,14 @@ class MainActivity : AppCompatActivity() {
 
         //добавление трека в список
         addnew.setOnClickListener {
-            songmap.put(songinput.text.toString(),bpminput.text.toString().toInt()) //добавили название_трека : БПМ
-            viewsong.add(songinput.text.toString()) // добавили название трека для списка фронта
-            songlistadapter.notifyDataSetChanged()
+            if (viewsong.indexOf(songinput.text.toString()) > 0){
+            addalert.show()
+            }
+            else{
+                songmap.put(songinput.text.toString(),bpminput.text.toString().toInt()) //добавили название_трека : БПМ
+                viewsong.add(songinput.text.toString()) // добавили название трека для списка фронта
+                songlistadapter.notifyDataSetChanged()
+            }
 
         }
 
@@ -117,30 +130,20 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        //Остановка клика
         stopclick.setOnClickListener {
             startstop = 0
             stopSound()
         }
     }
-    private suspend fun go_volume(): Unit{
-        do {
-            mediaPlayer?.start()
-            delay(1000)
-        }
-        while(mediaPlayer?.isPlaying == true)
-        //Thread.sleep(bpm.toLong())
-    }
+
+
     private fun playClick() {
         // Создаем MediaPlayer и загружаем звуковой файл из ресурсов
         mediaPlayer = MediaPlayer.create(this, R.raw.clic)
 
-        // Устанавливаем обработчик окончания воспроизведения звука
-        //mediaPlayer?.setOnCompletionListener {
-        //    stopSound()
-        //}
 
-        // Начинаем воспроизведение звука
-        //mediaPlayer?.start()
     }
 
     private fun stopSound() {
@@ -155,6 +158,7 @@ class MainActivity : AppCompatActivity() {
             mediaPlayer = null
         }
     }
+
     override fun onStop() {
         super.onStop()
 
