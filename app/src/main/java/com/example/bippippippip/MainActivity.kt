@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.content.pm.ActivityInfo
 import android.graphics.Color
+import android.widget.TextView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
@@ -40,13 +41,16 @@ class MainActivity : AppCompatActivity() {
 
         //всё с фронта
         val songview: GridView = findViewById(R.id.view_song)
-        val bpminput: EditText = findViewById(R.id.input_bpm)
+        val bpminput: TextView = findViewById(R.id.input_bpm)
         val bpmspin: SeekBar = findViewById(R.id.seekBar)
         val songinput: EditText = findViewById(R.id.input_song)
         val addnew: Button = findViewById(R.id.add_but)
         val deletesong: Button = findViewById(R.id.del_but)
         val playclick: Button = findViewById(R.id.play_but)
         val stopclick: Button = findViewById(R.id.stop_but)
+        val onePlus: Button = findViewById(R.id.onePlus)
+        val oneMinus: Button = findViewById(R.id.oneMinus)
+
 
         //Алерт при добавлении трека с одинаковым названием трека.
         val addalert = AlertDialog.Builder(this@MainActivity)
@@ -135,6 +139,20 @@ class MainActivity : AppCompatActivity() {
         stopclick.setOnClickListener {
             startstop = 0
             stopSound()
+        }
+
+        onePlus.setOnClickListener{
+            var counter: Int = bpminput.text.toString().toInt()
+            counter++
+            bpminput.setText(counter.toString())
+            bpmspin.setProgress(counter)
+        }
+
+        oneMinus.setOnClickListener{
+            var counter: Int = bpminput.text.toString().toInt()
+            counter--
+            bpminput.setText(counter.toString())
+            bpmspin.setProgress(counter)
         }
     }
 

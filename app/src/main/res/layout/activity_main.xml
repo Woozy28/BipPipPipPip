@@ -5,7 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
+    android:orientation="horizontal"
     tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/oneMinus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="140dp"
+        android:text="-1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.363" />
 
     <Button
         android:id="@+id/stage_but"
@@ -23,24 +36,24 @@
         android:id="@+id/play_but"
         android:layout_width="180dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="240dp"
+        android:layout_marginBottom="188dp"
         android:text="PLAY"
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.659"
+        app:layout_constraintHorizontal_bias="0.658"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/stop_but"
         android:layout_width="180dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="240dp"
+        android:layout_marginBottom="188dp"
         android:text="STOP"
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.937"
+        app:layout_constraintHorizontal_bias="0.939"
         app:layout_constraintStart_toStartOf="parent" />
 
     <SeekBar
@@ -48,23 +61,22 @@
         style="@android:style/Widget.SeekBar"
         android:layout_width="400dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="376dp"
+        android:layout_marginBottom="400dp"
         android:max="255"
         android:min="1"
         android:progress="100"
         android:scrollbarStyle="insideInset"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.918"
+        app:layout_constraintHorizontal_bias="0.914"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/input_bpm"
         android:layout_width="420dp"
         android:layout_height="58dp"
         android:layout_marginStart="512dp"
         android:ems="10"
-        android:inputType="number"
         android:maxLength="3"
         android:text="100"
         android:textAlignment="center"
@@ -125,5 +137,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.97" />
+
+    <Button
+        android:id="@+id/onePlus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="268dp"
+        android:text="+1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.363" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
