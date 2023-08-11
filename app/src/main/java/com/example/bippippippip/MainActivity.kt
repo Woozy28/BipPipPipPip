@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
 
+
         val songmap = mutableMapOf<String,Int>("First song" to 120, "Second song" to 140) //список с бипиэмами
         val viewsong = mutableListOf<String>("First song","Second song") //Список песен
         var now_playing:String = ""
@@ -52,13 +53,6 @@ class MainActivity : AppCompatActivity() {
         val oneMinus: Button = findViewById(R.id.oneMinus)
 
 
-        //Алерт при добавлении трека с одинаковым названием трека.
-        val addalert = AlertDialog.Builder(this@MainActivity)
-        addalert.setTitle("Can't do that")
-        addalert.setMessage("Need new name of song")
-        addalert.setPositiveButton("OK"){_,_ ->
-
-        }
 
 
 
@@ -94,7 +88,15 @@ class MainActivity : AppCompatActivity() {
         //добавление трека в список
         addnew.setOnClickListener {
             if (viewsong.indexOf(songinput.text.toString()) > 0){
-            addalert.show()
+                //Алерт при добавлении трека с одинаковым названием трека.
+                val addalert = AlertDialog.Builder(this@MainActivity)
+                addalert.setTitle("Can't do that")
+                addalert.setMessage("Need new name of song")
+                addalert.setPositiveButton("OK"){_,_ ->
+
+                }
+
+                addalert.show()
             }
             else{
                 songmap.put(songinput.text.toString(),bpminput.text.toString().toInt()) //добавили название_трека : БПМ
