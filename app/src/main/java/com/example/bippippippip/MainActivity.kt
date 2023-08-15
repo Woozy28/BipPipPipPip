@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit
 class MainActivity : AppCompatActivity() {
 
 
+
     private var mediaPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,12 +34,18 @@ class MainActivity : AppCompatActivity() {
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
+        val db = DbHelper(this,null)
 
 
-        val songmap = mutableMapOf<String,Int>("First song" to 120, "Second song" to 140) //список с бипиэмами
-        val viewsong = mutableListOf<String>("First song","Second song") //Список песен
+
+
+        val songmap = mutableMapOf<String,Int>() //список с бипиэмами
+        val viewsong = mutableListOf<String>() //Список песен
         var now_playing:String = ""
         var startstop: Int = 1
+
+
+
 
         //всё с фронта
         val songview: GridView = findViewById(R.id.view_song)
@@ -87,7 +94,7 @@ class MainActivity : AppCompatActivity() {
 
         //добавление трека в список
         addnew.setOnClickListener {
-            if (viewsong.indexOf(songinput.text.toString()) > 0){
+            if (viewsong.indexOf(songinput.text.toString()) >= 0){
                 //Алерт при добавлении трека с одинаковым названием трека.
                 val addalert = AlertDialog.Builder(this@MainActivity)
                 addalert.setTitle("Can't do that")
@@ -102,6 +109,7 @@ class MainActivity : AppCompatActivity() {
                 songmap.put(songinput.text.toString(),bpminput.text.toString().toInt()) //добавили название_трека : БПМ
                 viewsong.add(songinput.text.toString()) // добавили название трека для списка фронта
                 songlistadapter.notifyDataSetChanged()
+
             }
 
         }
@@ -157,6 +165,7 @@ class MainActivity : AppCompatActivity() {
             bpmspin.setProgress(counter)
         }
     }
+
 
 
     private fun playClick() {
