@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        //всё с фронта
+        //кнопки и вьюхи с фронта
         val songview: GridView = findViewById(R.id.view_song)
         val bpminput: TextView = findViewById(R.id.input_bpm)
         val bpmspin: SeekBar = findViewById(R.id.seekBar)
