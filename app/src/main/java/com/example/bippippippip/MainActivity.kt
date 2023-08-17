@@ -1,5 +1,6 @@
 package com.example.bippippippip
 
+import android.content.pm.ActivityInfo
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -7,19 +8,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.GridView
 import android.widget.SeekBar
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import android.content.pm.ActivityInfo
-import android.graphics.Color
-import android.widget.TextView
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,20 +30,18 @@ class MainActivity : AppCompatActivity() {
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
+        //Инициализируем хэлпер для sql
         val db = DbHelper(this,null)
 
 
-
-
+        //Списки для вьюх и запуска клика в медиаплеере
         val songmap = mutableMapOf<String,Int>() //список с бипиэмами
         val viewsong = mutableListOf<String>() //Список песен
         var now_playing:String = ""
         var startstop: Int = 1
 
 
-
-
-        //кнопки и вьюхи с фронта
+        //кнопки и вьюхи с фронта (надо переделать на байдинг)
         val songview: GridView = findViewById(R.id.view_song)
         val bpminput: TextView = findViewById(R.id.input_bpm)
         val bpmspin: SeekBar = findViewById(R.id.seekBar)
