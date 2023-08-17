@@ -58,11 +58,12 @@ class MainActivity : AppCompatActivity() {
         val songlistadapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,viewsong)
         songview.adapter = songlistadapter
 
-        //db.getSong().forEach { (i, j) ->
-        //    songmap[i] = j
-        //    viewsong.add(i)
-        //    songlistadapter.notifyDataSetChanged()
-        //}
+        //прокидываем из БД таблицу в мап для вью
+            db.getSong().forEach { (i, j) ->
+            songmap[i] = j
+            viewsong.add(i)
+            songlistadapter.notifyDataSetChanged()
+        }
 
 
 
@@ -73,8 +74,6 @@ class MainActivity : AppCompatActivity() {
             bpminput.setText(songmap.get(songlistadapter.getItem(position).toString()).toString())
             now_playing = parent.getItemAtPosition(position).toString() //текущее название трека
             bpmspin.setProgress(songmap.get(now_playing)!!.toInt())
-
-            //доработка для БД
 
 
         }
@@ -115,8 +114,8 @@ class MainActivity : AppCompatActivity() {
                 songlistadapter.notifyDataSetChanged()
 
                 //добавляем в БД
-                //val value = Song(songinput.text.toString(), bpminput.text.toString())
-                //db.addSong(value)
+                val value = Song(songinput.text.toString(), bpminput.text.toString())
+                db.addSong(value)
 
             }
 
@@ -133,7 +132,7 @@ class MainActivity : AppCompatActivity() {
                 songlistadapter.notifyDataSetChanged()
 
                 //удаляем из БД
-                //db.delSong(now_playing)
+                db.delSong(now_playing)
             }
             deletalert.setNeutralButton("Stop it!"){_,_ ->}
 
