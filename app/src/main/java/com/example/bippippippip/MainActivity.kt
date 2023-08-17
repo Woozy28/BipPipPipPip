@@ -35,10 +35,11 @@ class MainActivity : AppCompatActivity() {
 
 
         //Списки для вьюх и запуска клика в медиаплеере
-        val songmap = mutableMapOf<String,Int>() //список с бипиэмами
+        val songmap = mutableMapOf<String,String>() //список с бипиэмами
         val viewsong = mutableListOf<String>() //Список песен
         var now_playing:String = ""
         var startstop: Int = 1
+
 
 
         //кнопки и вьюхи с фронта (надо переделать на байдинг)
@@ -53,20 +54,29 @@ class MainActivity : AppCompatActivity() {
         val onePlus: Button = findViewById(R.id.onePlus)
         val oneMinus: Button = findViewById(R.id.oneMinus)
 
-
-
-
-
         //адаптер для списка
         val songlistadapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,viewsong)
         songview.adapter = songlistadapter
+
+        //db.getSong().forEach { (i, j) ->
+        //    songmap[i] = j
+        //    viewsong.add(i)
+        //    songlistadapter.notifyDataSetChanged()
+        //}
+
+
+
 
 
         //выбор трека
         songview.setOnItemClickListener { parent, view, position, id ->
             bpminput.setText(songmap.get(songlistadapter.getItem(position).toString()).toString())
             now_playing = parent.getItemAtPosition(position).toString() //текущее название трека
-            bpmspin.setProgress(songmap.get(now_playing)!!)
+            bpmspin.setProgress(songmap.get(now_playing)!!.toInt())
+
+            //доработка для БД
+
+
         }
 
         //листенер сикбара
@@ -100,9 +110,13 @@ class MainActivity : AppCompatActivity() {
                 addalert.show()
             }
             else{
-                songmap.put(songinput.text.toString(),bpminput.text.toString().toInt()) //добавили название_трека : БПМ
+                songmap.put(songinput.text.toString(),bpminput.text.toString()) //добавили название_трека : БПМ
                 viewsong.add(songinput.text.toString()) // добавили название трека для списка фронта
                 songlistadapter.notifyDataSetChanged()
+
+                //добавляем в БД
+                //val value = Song(songinput.text.toString(), bpminput.text.toString())
+                //db.addSong(value)
 
             }
 
@@ -117,6 +131,9 @@ class MainActivity : AppCompatActivity() {
                 viewsong.remove(now_playing)
                 songmap.remove(now_playing)
                 songlistadapter.notifyDataSetChanged()
+
+                //удаляем из БД
+                //db.delSong(now_playing)
             }
             deletalert.setNeutralButton("Stop it!"){_,_ ->}
 
