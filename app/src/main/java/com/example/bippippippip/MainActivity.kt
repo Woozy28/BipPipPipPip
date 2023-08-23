@@ -1,10 +1,12 @@
 package com.example.bippippippip
 
 import android.content.pm.ActivityInfo
-import android.media.MediaPlayer
+import android.media.AudioAttributes
+import android.media.AudioManager
+import android.media.SoundPool
+import android.os.Build
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import android.widget.SeekBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
 
     lateinit var bind  : ActivityMainBinding
-    private var mediaPlayer: MediaPlayer? = null
+    private var soundPool: SoundPool? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,26 @@ class MainActivity : AppCompatActivity() {
         //биндинг для вьюшек
         bind = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
+
+        //задаём параметры для саундпула и проверяем актуальную версию СДК
+        soundPool = if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
+            val audioAttributes = AudioAttributes.Builder()
+                .setUsage(
+                    AudioAttributes.USAGE_ASSISTANCE_SONIFICATION
+                )
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build()
+            SoundPool.Builder()
+                .setMaxStreams(3)
+                .setAudioAttributes(audioAttributes)
+                .build()
+        }else
+        {
+            SoundPool(1,AudioManager.STREAM_MUSIC,0)
+        }
+
+        //Загружаем клик из папки роу
+        val click = soundPool!!.load(this, R.raw.clic,1)
 
         //Поворот экрана по горизонтали
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -134,11 +156,11 @@ class MainActivity : AppCompatActivity() {
         //Запуск клика
         bind.playBut.setOnClickListener {
             val bpm:Int= 60000/bind.inputBpm.text.toString().toInt()
-            playClick()
+            //playClick()
             startstop = true
             uiScope.launch {
                 while(startstop) {
-                    mediaPlayer?.start()
+                    soundPool!!.play(click,1f,1f,0,0,1f)
                     delay(bpm.toLong())
                 }
             }
@@ -147,7 +169,7 @@ class MainActivity : AppCompatActivity() {
         //Остановка клика
         bind.stopBut.setOnClickListener {
             startstop = false
-            stopSound()
+
         }
 
         //+1 клик
@@ -168,45 +190,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-    private fun playClick() {
-        // Создаем MediaPlayer и загружаем звуковой файл из ресурсов
-        mediaPlayer = MediaPlayer.create(this, R.raw.clic)
-
-
-    }
-
-    private fun stopSound() {
-        // Проверяем, был ли MediaPlayer создан
-        mediaPlayer?.let {
-            if (it.isPlaying) {
-                // Останавливаем воспроизведение звука
-                it.stop()
-            }
-            // Освобождаем ресурсы MediaPlayer
-            it.release()
-            mediaPlayer = null
-        }
-    }
-
     override fun onStop() {
         super.onStop()
-
-        // Освобождаем ресурсы MediaPlayer при закрытии активности или фрагмента
-        stopSound()
     }
-
 }
-
-//кнопки и вьюхи с фронта (надо переделать на байдинг)
-
-//val songview: GridView = findViewById(R.id.view_song)
-//val bpminput: TextView = findViewById(R.id.input_bpm)
-//val bpmspin: SeekBar = findViewById(R.id.seekBar)
-//val songinput: EditText = findViewById(R.id.input_song)
-//val addnew: Button = findViewById(R.id.add_but)
-//val deletesong: Button = findViewById(R.id.del_but)
-//val playclick: Button = findViewById(R.id.play_but)
-//val stopclick: Button = findViewById(R.id.stop_but)
-//val onePlus: Button = findViewById(R.id.onePlus)
-//val oneMinus: Button = findViewById(R.id.oneMinus)
