@@ -20,7 +20,6 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-
     lateinit var bind  : ActivityMainBinding
     private var soundPool: SoundPool? = null
 
@@ -50,6 +49,8 @@ class MainActivity : AppCompatActivity() {
 
         //Загружаем клик из папки роу
         val click = soundPool!!.load(this, R.raw.clic,1)
+        val woodClick = soundPool!!.load(this, R.raw.wood,1)
+        val chikClick = soundPool!!.load(this, R.raw.click2,1)
 
         //Поворот экрана по горизонтали
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -156,12 +157,22 @@ class MainActivity : AppCompatActivity() {
         //Запуск клика
         bind.playBut.setOnClickListener {
             val bpm:Int= 60000/bind.inputBpm.text.toString().toInt()
-            //playClick()
+            var count: Int = 0
             startstop = true
             uiScope.launch {
                 while(startstop) {
-                    soundPool!!.play(click,1f,1f,0,0,1f)
+                    if (count == 0)
+                    {
+                        soundPool!!.play(click,1f,1f,0,0,1f)
+                        delay(bpm.toLong())
+                        count++
+                    }
+                    soundPool!!.play(chikClick,1f,1f,0,0,1f)
                     delay(bpm.toLong())
+                    count++
+                    if (count==4){
+                        count=0
+                    }
                 }
             }
         }
