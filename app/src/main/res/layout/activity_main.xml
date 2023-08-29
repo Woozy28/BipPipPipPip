@@ -11,142 +11,145 @@
 
     <Button
         android:id="@+id/oneMinus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="268dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="32dp"
         android:text="-1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.363" />
+        app:layout_constraintStart_toEndOf="@+id/view_song"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
     <Button
         android:id="@+id/stage_but"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
         android:text="Stage mod"
         android:textSize="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.914"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/view_song"
+        app:layout_constraintTop_toBottomOf="@+id/stop_but" />
 
     <Button
         android:id="@+id/play_but"
-        android:layout_width="180dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="188dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         android:text="PLAY"
         android:textSize="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.658"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/stage_but"
+        app:layout_constraintStart_toEndOf="@+id/view_song"
+        app:layout_constraintTop_toBottomOf="@+id/oneMinus" />
 
     <Button
         android:id="@+id/stop_but"
-        android:layout_width="180dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="188dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
         android:text="STOP"
         android:textSize="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.939"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/onePlus" />
 
     <SeekBar
         android:id="@+id/seekBar"
         style="@android:style/Widget.SeekBar"
-        android:layout_width="400dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="400dp"
+        android:layout_width="461dp"
+        android:layout_height="85dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
         android:max="255"
         android:min="1"
         android:progress="100"
         android:scrollbarStyle="insideInset"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.914"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/view_song"
+        app:layout_constraintTop_toBottomOf="@+id/input_bpm" />
 
     <TextView
         android:id="@+id/input_bpm"
-        android:layout_width="420dp"
+        android:layout_width="0dp"
         android:layout_height="58dp"
-        android:layout_marginStart="512dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:maxLength="3"
         android:text="100"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/view_song"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <GridView
         android:id="@+id/view_song"
         style="@android:style/Widget.DeviceDefault.GridView"
-        android:layout_width="481dp"
-        android:layout_height="442dp"
-        android:layout_marginStart="4dp"
+        android:layout_width="472dp"
+        android:layout_height="440dp"
 
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:cacheColorHint="#0C0707"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/del_but"
-        android:layout_width="180dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginStart="732dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="32dp"
         android:text="DELETE"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.97" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stage_but" />
 
     <Button
         android:id="@+id/add_but"
-        android:layout_width="180dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginStart="524dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         android:text="ADD NEW"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.97" />
+        app:layout_constraintStart_toEndOf="@+id/input_song"
+        app:layout_constraintTop_toBottomOf="@+id/stage_but" />
 
     <EditText
         android:id="@+id/input_song"
-        android:layout_width="481dp"
-        android:layout_height="58dp"
+        android:layout_width="472dp"
+        android:layout_height="72dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
         android:inputType="text"
         android:text="Input name song"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.97" />
+        app:layout_constraintTop_toBottomOf="@+id/view_song" />
 
     <Button
         android:id="@+id/onePlus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="140dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="86dp"
         android:text="+1"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.363" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
