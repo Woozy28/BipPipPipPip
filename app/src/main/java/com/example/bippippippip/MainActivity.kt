@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         val click = soundPool!!.load(this, R.raw.clic,1)
         val woodClick = soundPool!!.load(this, R.raw.wood,1)
         val chikClick = soundPool!!.load(this, R.raw.click2,1)
+        
 
         //Поворот экрана по горизонтали
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
