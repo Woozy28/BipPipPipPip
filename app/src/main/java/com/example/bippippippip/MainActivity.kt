@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         val click = soundPool!!.load(this, R.raw.clic,1)
         val woodClick = soundPool!!.load(this, R.raw.wood,1)
         val chikClick = soundPool!!.load(this, R.raw.click2,1)
-        
+
 
         //Поворот экрана по горизонтали
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -74,8 +74,9 @@ class MainActivity : AppCompatActivity() {
         val uiScope = CoroutineScope(Main + viewModelJob)
 
         //адаптер для списка
-        val songlistadapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,viewsong)
+        val songlistadapter = ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item,viewsong)
         bind.viewSong.adapter = songlistadapter
+
 
         //прокидываем из БД таблицу в мап для вью
             db.getSong().forEach { (i, j) ->
