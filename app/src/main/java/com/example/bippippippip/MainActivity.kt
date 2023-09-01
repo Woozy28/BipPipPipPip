@@ -182,7 +182,6 @@ class MainActivity : AppCompatActivity() {
         //Остановка клика
         bind.stopBut.setOnClickListener {
             startstop = false
-
         }
 
         //+1 клик
