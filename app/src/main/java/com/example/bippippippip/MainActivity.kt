@@ -158,11 +158,28 @@ class MainActivity : AppCompatActivity() {
             val bpm:Int= 60000/bind.inputBpm.text.toString().toInt()
             var count: Int = 0
 
+            val strong = intent.getIntExtra("strong",1)
+            val weak = intent.getIntExtra("weak",1)
+
 
             //Загружаем клик из папки роу
-            val click1 = soundPool!!.load(this, R.raw.clic,1)
-            val click2 = soundPool!!.load(this, R.raw.wood,1)
-            val click3 = soundPool!!.load(this, R.raw.click2,1)
+            //val click1 = soundPool!!.load(this, R.raw.clic,1)
+            //val click2 = soundPool!!.load(this, R.raw.wood,1)
+            //val click3 = soundPool!!.load(this, R.raw.click2,1)
+            var click1 = soundPool!!.load(this, R.raw.clic,1)
+            when(strong){
+                1 -> click1 = soundPool!!.load(this, R.raw.clic,1)
+                2 -> click1 = soundPool!!.load(this, R.raw.wood,1)
+                3 -> click1 = soundPool!!.load(this, R.raw.click2,1)
+            }
+            var click2 = soundPool!!.load(this, R.raw.clic,1)
+            when(weak){
+                1 -> click2 = soundPool!!.load(this, R.raw.clic,1)
+                2 -> click2 = soundPool!!.load(this, R.raw.wood,1)
+                3 -> click2 = soundPool!!.load(this, R.raw.click2,1)
+            }
+
+
 
             startstop = true
             uiScope.launch {
@@ -209,6 +226,9 @@ class MainActivity : AppCompatActivity() {
             val goSetting = Intent(this,Settings::class.java)
             startActivity(goSetting)
         }
+
+
+
     }
 
 
