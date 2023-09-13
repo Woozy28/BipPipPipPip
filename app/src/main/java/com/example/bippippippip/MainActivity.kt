@@ -1,5 +1,6 @@
 package com.example.bippippippip
 
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.media.AudioAttributes
 import android.media.AudioManager
@@ -47,10 +48,6 @@ class MainActivity : AppCompatActivity() {
             SoundPool(1,AudioManager.STREAM_MUSIC,0)
         }
 
-        //Загружаем клик из папки роу
-        val click = soundPool!!.load(this, R.raw.clic,1)
-        val woodClick = soundPool!!.load(this, R.raw.wood,1)
-        val chikClick = soundPool!!.load(this, R.raw.click2,1)
 
 
         //Поворот экрана по горизонтали
@@ -160,16 +157,23 @@ class MainActivity : AppCompatActivity() {
         bind.playBut.setOnClickListener {
             val bpm:Int= 60000/bind.inputBpm.text.toString().toInt()
             var count: Int = 0
+
+
+            //Загружаем клик из папки роу
+            val click1 = soundPool!!.load(this, R.raw.clic,1)
+            val click2 = soundPool!!.load(this, R.raw.wood,1)
+            val click3 = soundPool!!.load(this, R.raw.click2,1)
+
             startstop = true
             uiScope.launch {
                 while(startstop) {
                     if (count == 0)
                     {
-                        soundPool!!.play(click,1f,1f,0,0,1f)
+                        soundPool!!.play(click1,1f,1f,0,0,1f)
                         delay(bpm.toLong())
                         count++
                     }
-                    soundPool!!.play(chikClick,1f,1f,0,0,1f)
+                    soundPool!!.play(click2,1f,1f,0,0,1f)
                     delay(bpm.toLong())
                     count++
                     if (count==4){
@@ -198,6 +202,12 @@ class MainActivity : AppCompatActivity() {
             counter--
             bind.inputBpm.setText(counter.toString())
             bind.seekBar.setProgress(counter)
+        }
+
+        //Переход в настройки
+        bind.stageBut.setOnClickListener {
+            val goSetting = Intent(this,Settings::class.java)
+            startActivity(goSetting)
         }
     }
 
