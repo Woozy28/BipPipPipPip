@@ -153,26 +153,34 @@ class MainActivity : AppCompatActivity() {
             deletalert.show()
         }
 
+
+
+
+        //Загружаем клик из папки роу
+        //val click1 = soundPool!!.load(this, R.raw.clic,1)
+        //val click2 = soundPool!!.load(this, R.raw.wood,1)
+        //val click3 = soundPool!!.load(this, R.raw.click2,1)
+
+
+
+
         //Запуск клика
         bind.playBut.setOnClickListener {
-            val bpm:Int= 60000/bind.inputBpm.text.toString().toInt()
-            var count: Int = 0
 
+            val bpm:Int= 60000/bind.inputBpm.text.toString().toInt()
+            var count: Int = 4
+
+            var click1: Int = 1
+            var click2: Int = 1
             val strong = intent.getIntExtra("strong",1)
             val weak = intent.getIntExtra("weak",1)
 
-
-            //Загружаем клик из папки роу
-            //val click1 = soundPool!!.load(this, R.raw.clic,1)
-            //val click2 = soundPool!!.load(this, R.raw.wood,1)
-            //val click3 = soundPool!!.load(this, R.raw.click2,1)
-            var click1 = soundPool!!.load(this, R.raw.clic,1)
-            when(strong){
+            when (strong) {
                 1 -> click1 = soundPool!!.load(this, R.raw.clic,1)
                 2 -> click1 = soundPool!!.load(this, R.raw.wood,1)
                 3 -> click1 = soundPool!!.load(this, R.raw.click2,1)
             }
-            var click2 = soundPool!!.load(this, R.raw.clic,1)
+
             when(weak){
                 1 -> click2 = soundPool!!.load(this, R.raw.clic,1)
                 2 -> click2 = soundPool!!.load(this, R.raw.wood,1)
@@ -184,25 +192,32 @@ class MainActivity : AppCompatActivity() {
             startstop = true
             uiScope.launch {
                 while(startstop) {
-                    if (count == 0)
-                    {
-                        soundPool!!.play(click1,1f,1f,0,0,1f)
+
+                    if (count == 4) {
+                        soundPool!!.play(click1, 1f, 1f, 0, 0, 1f)
                         delay(bpm.toLong())
-                        count++
+                        count--
                     }
-                    soundPool!!.play(click2,1f,1f,0,0,1f)
-                    delay(bpm.toLong())
-                    count++
-                    if (count==4){
-                        count=0
+                    if (count < 4) {
+                        soundPool!!.play(click2, 1f, 1f, 0, 0, 1f)
+                        delay(bpm.toLong())
+                        count--
+                        if (count == 0) {
+                            count = 4
+                        }
                     }
+
                 }
+
+
+
             }
         }
 
         //Остановка клика
         bind.stopBut.setOnClickListener {
             startstop = false
+
         }
 
         //+1 клик

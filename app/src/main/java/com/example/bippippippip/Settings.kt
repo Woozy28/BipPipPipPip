@@ -15,29 +15,33 @@ class Settings : AppCompatActivity() {
 
 
 
-        val selectWeakId = bindset.WeakGroup.checkedRadioButtonId
-        val weak: Int = when(selectWeakId){
-            R.id.weak_1 -> 1
-            R.id.weak_2 -> 2
-            R.id.weak_3 -> 3
-            else -> {1}
-        }
 
-
-        val selectStrongId = bindset.StrongGroup.checkedRadioButtonId
-        val strong: Int = when(selectStrongId){
-            R.id.strong_1 -> 1
-            R.id.strong_2 -> 2
-            R.id.strong_3 -> 3
-            else -> {1}
-        }
 
         //переход обратно на главную
         bindset.goBack.setOnClickListener {
-            val goback = Intent(this,MainActivity::class.java).putExtra("weak", weak)
+
+            val selectWeakId = bindset.WeakGroup.checkedRadioButtonId
+            val weak: Int = when(selectWeakId){
+                bindset.weak1.id -> 1
+                bindset.weak2.id -> 2
+                bindset.weak3.id -> 3
+                else -> {2}
+            }
+
+
+            val selectStrongId = bindset.StrongGroup.checkedRadioButtonId
+            val strong: Int = when(selectStrongId){
+                bindset.strong1.id -> 1
+                bindset.strong2.id -> 2
+                bindset.strong3.id -> 3
+                else -> {2}
+            }
+
+            val goback = Intent(this,MainActivity::class.java)
+            goback.putExtra("weak", weak)
+            goback.putExtra("strong",strong)
             startActivity(goback)
-            intent.putExtra("weak", weak)
-            intent.putExtra("strong",strong)
+
 
         }
     }
